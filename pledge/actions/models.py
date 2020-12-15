@@ -8,6 +8,9 @@ class Action(TimeStampedModel, TitleSlugDescriptionModel):
         return self.title
 
 
+class Metric(TimeStampedModel, TitleSlugDescriptionModel):
+    def __str__(self):
+        return self.title
 
 
 class Constant(TimeStampedModel):
