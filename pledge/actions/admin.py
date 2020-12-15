@@ -10,8 +10,16 @@ class ActionAdmin(admin.ModelAdmin):
 
 @admin.register(Constant)
 class ConstantAdmin(admin.ModelAdmin):
-    list_display = ("action", "identifier", "version", "value", "created", "modified")
-    list_filter = ("action",)
+    list_display = (
+        "action",
+        "metric",
+        "identifier",
+        "version",
+        "value",
+        "created",
+        "modified",
+    )
+    list_filter = ("action", "metric")
 
 
 @admin.register(Metric)

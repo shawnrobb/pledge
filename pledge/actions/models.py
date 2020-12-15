@@ -15,6 +15,7 @@ class Metric(TimeStampedModel, TitleSlugDescriptionModel):
 
 class Constant(TimeStampedModel):
     action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    metric = models.ForeignKey(Metric, on_delete=models.CASCADE)
     version = models.PositiveSmallIntegerField(default=1)
     identifier = models.CharField(
         max_length=64
@@ -22,7 +23,7 @@ class Constant(TimeStampedModel):
     value = models.FloatField()
 
     class Meta:
-        unique_together = ("action", "version", "identifier")
+        unique_together = ("action", "metric", "version", "identifier")
 
     def __str__(self):
         return f"{self.action} ({self.identifier}) v{self.version}"
