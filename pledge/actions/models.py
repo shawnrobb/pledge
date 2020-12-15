@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from django_extensions.db.models import TitleSlugDescriptionModel, TimeStampedModel
@@ -27,3 +28,21 @@ class Constant(TimeStampedModel):
 
     def __str__(self):
         return f"{self.action} ({self.identifier}) v{self.version}"
+
+
+class Pledge(TimeStampedModel):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    attribute = models.CharField(
+        max_length=64
+    )  # Todo: add validator to constrain to specific characters (e.g. a-z and underscores)
+    value = models.FloatField()
+
+    class Meta:
+        unique_together = ("user", "action", "attribute")
+
+    def __str__(self):
+        return f"{self.user} - ({self.action}) ({self.attribute})"

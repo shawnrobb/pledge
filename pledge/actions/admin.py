@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from pledge.actions.models import Action, Constant, Metric
+from pledge.actions.models import Action, Constant, Metric, Pledge
 
 
 @admin.register(Action)
@@ -25,3 +25,16 @@ class ConstantAdmin(admin.ModelAdmin):
 @admin.register(Metric)
 class MetricAdmin(admin.ModelAdmin):
     list_display = ("title", "slug", "description", "created", "modified")
+
+
+@admin.register(Pledge)
+class PledgeAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "action",
+        "attribute",
+        "value",
+        "created",
+        "modified",
+    )
+    list_filter = ("action",)
