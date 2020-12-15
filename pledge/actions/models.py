@@ -76,3 +76,16 @@ class SelectOption(TimeStampedModel):
 
     def __str__(self):
         return f"{self.question} ({self.display_text})"
+
+
+class Formula(TimeStampedModel):
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    metric = models.ForeignKey(Metric, on_delete=models.CASCADE)
+    version = models.PositiveSmallIntegerField(default=1)
+    eval_string = models.CharField(max_length=128)
+
+    def __str__(self):
+        return f"{self.action} ({self.metric}) v{self.version}"
+
+    class Meta:
+        unique_together = ("action", "metric", "version")

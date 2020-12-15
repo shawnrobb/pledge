@@ -7,6 +7,7 @@ from pledge.actions.models import (
     Pledge,
     Question,
     SelectOption,
+    Formula,
 )
 
 
@@ -56,3 +57,16 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ("action", "identifier", "question_type")
     list_filter = ("action", "question_type")
     inlines = [SelectOptionInline]
+
+
+@admin.register(Formula)
+class FormulaAdmin(admin.ModelAdmin):
+    list_display = (
+        "action",
+        "metric",
+        "version",
+        "eval_string",
+        "created",
+        "modified",
+    )
+    list_filter = ("action", "metric")
