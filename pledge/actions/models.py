@@ -46,3 +46,21 @@ class Pledge(TimeStampedModel):
 
     def __str__(self):
         return f"{self.user} - ({self.action}) ({self.attribute})"
+
+
+class Question(TimeStampedModel):
+    SELECT = "select"
+    NUMBER = "number"
+    TYPE_CHOICES = ((NUMBER, NUMBER), (SELECT, SELECT))
+
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    identifier = models.CharField(
+        max_length=64
+    )  # Todo: add validator to constrain to specific characters (e.g. a-z and underscores)
+    question_type = models.CharField(max_length=6, choices=TYPE_CHOICES, default=NUMBER)
+
+    class Meta:
+        unique_together = ("action", "identifier")
+
+    def __str__(self):
+        return f"{self.action} ({self.identifier})"

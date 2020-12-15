@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from pledge.actions.models import Action, Constant, Metric, Pledge
+from pledge.actions.models import Action, Constant, Metric, Pledge, Question
 
 
 @admin.register(Action)
@@ -38,3 +38,9 @@ class PledgeAdmin(admin.ModelAdmin):
         "modified",
     )
     list_filter = ("action",)
+
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ("action", "identifier", "question_type")
+    list_filter = ("action", "question_type")
