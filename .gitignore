@@ -276,3 +276,4 @@ pledge/media/
 .envs/.local/
 
 .editorconfig
+settings.json

@@ -41,9 +41,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///pledge")
-}
+DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///pledge")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
@@ -75,6 +73,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "pledge.users.apps.UsersConfig",
+    "pledge.actions.apps.ActionsConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
