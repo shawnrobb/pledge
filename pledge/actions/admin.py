@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from pledge.actions.models import Action, Constant, Metric, Pledge, Question
+from pledge.actions.models import (
+    Action,
+    Constant,
+    Metric,
+    Pledge,
+    Question,
+    SelectOption,
+)
 
 
 @admin.register(Action)
@@ -40,7 +47,12 @@ class PledgeAdmin(admin.ModelAdmin):
     list_filter = ("action",)
 
 
+class SelectOptionInline(admin.TabularInline):
+    model = SelectOption
+
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ("action", "identifier", "question_type")
     list_filter = ("action", "question_type")
+    inlines = [SelectOptionInline]

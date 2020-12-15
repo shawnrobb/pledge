@@ -64,3 +64,15 @@ class Question(TimeStampedModel):
 
     def __str__(self):
         return f"{self.action} ({self.identifier})"
+
+
+class SelectOption(TimeStampedModel):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    display_text = models.CharField(max_length=64)
+    value = models.FloatField(default=0)
+
+    class Meta:
+        unique_together = ("question", "display_text")
+
+    def __str__(self):
+        return f"{self.question} ({self.display_text})"
