@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>Total Pledges: {{ total_pledges }}</h3>
+    <h1>Total Pledges: {{ total_pledges }}</h1>
 
-    <h3>Impacts by Metric</h3>
+    <h2 class="mt-4">Impacts by Metric</h1>
     {% for metric in metrics %}
-    <p>Total {{ metric.0 }} Savings: {{ metric.1 }}</p>
+    <p><strong>Total {{ metric.0 }} Savings:</strong> {{ metric.1 }}</p>
+    {% endfor %}
+
+    <h3 class="mt-4">Your Pledges</h3>
+    {% for pledge in my_pledges %}
+        <p>
+            {{ forloop.counter }} {{ pledge.action.title }}
+        </p>
+    {% endfor %}
+
+    <h3 class="mt-4">See what others are pledging!</h3>
+    {% for user in users %}
+        <p>
+            <a href="{% url "user-pledges" username=user.username %}">{{ user }}</a>
+        </p>
     {% endfor %}
 {% endblock content %}

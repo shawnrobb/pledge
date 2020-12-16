@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h3>{{ object.username|capfirst }}'s Pledges</h3>
+    {% for pledge in pledges %}
+        <p>{{forloop.counter}}. {{ pledge.action.title }}</p>
+    {% empty %}
+        <p>{{ object.username }} hasn't made and pledges yet :-(</p>
+    {% endfor %}
+{% endblock content %}
+
