@@ -55,7 +55,7 @@ class SelectOption(TimeStampedModel):
 
 
 class Answer(TimeStampedModel):
-    pledge = models.ForeignKey(Pledge, on_delete=models.CASCADE)
+    pledge = models.ForeignKey(Pledge, on_delete=models.CASCADE, related_name="answers")
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     value = models.FloatField()
 
