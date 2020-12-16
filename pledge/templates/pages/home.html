@@ -2,4 +2,9 @@
 
 {% block content %}
     <h3>Total Pledges: {{ total_pledges }}</h3>
+
+    <h3>Impacts by Metric</h3>
+    {% for metric in metrics %}
+    <p>Total {{ metric.0 }} Savings: {{ metric.1 }}</p>
+    {% endfor %}
 {% endblock content %}
