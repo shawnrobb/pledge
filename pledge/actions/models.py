@@ -17,7 +17,7 @@ class Question(TimeStampedModel):
     action = models.ForeignKey(Action, on_delete=models.CASCADE)
     identifier = models.CharField(
         max_length=64
-    )  # Todo: add validator to constrain to specific characters (e.g. a-z and underscores)
+    )  # Todo: add validator to constrain tAcoo specific characters (e.g. a-z and underscores)
     question_type = models.CharField(max_length=6, choices=TYPE_CHOICES, default=NUMBER)
 
     class Meta:
@@ -39,7 +39,7 @@ class SelectOption(TimeStampedModel):
         return f"{self.question} ({self.display_text})"
 
 
-class Pledge(TimeStampedModel):
+class Answer(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

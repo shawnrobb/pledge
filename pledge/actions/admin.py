@@ -3,7 +3,7 @@ from django.contrib import admin
 from pledge.actions.models import (
     Action,
     Metric,
-    Pledge,
+    Answer,
     Question,
     SelectOption,
     Formula,
@@ -20,7 +20,7 @@ class MetricAdmin(admin.ModelAdmin):
     list_display = ("title", "slug", "description", "created", "modified")
 
 
-@admin.register(Pledge)
+@admin.register(Answer)
 class PledgeAdmin(admin.ModelAdmin):
     list_display = (
         "user",
