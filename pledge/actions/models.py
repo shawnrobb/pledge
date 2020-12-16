@@ -9,6 +9,21 @@ class Action(TimeStampedModel, TitleSlugDescriptionModel):
         return self.title
 
 
+class Pledge(TimeStampedModel):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    message = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        unique_together = ("user", "action")
+
+    def __str__(self):
+        return f"{self.user} ({self.action})"
+
+
 class Question(TimeStampedModel):
     SELECT = "select"
     NUMBER = "number"
@@ -40,18 +55,15 @@ class SelectOption(TimeStampedModel):
 
 
 class Answer(TimeStampedModel):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
+    pledge = models.ForeignKey(Pledge, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     value = models.FloatField()
 
     class Meta:
-        unique_together = ("user", "question")
+        unique_together = ("pledge", "question")
 
     def __str__(self):
-        return f"{self.user} - {self.question}"
+        return f"{self.pledge.user} - {self.question}"
 
 
 class Metric(TimeStampedModel, TitleSlugDescriptionModel):

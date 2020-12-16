@@ -7,6 +7,7 @@ from pledge.actions.models import (
     Question,
     SelectOption,
     Formula,
+    Pledge,
 )
 
 
@@ -15,15 +16,20 @@ class ActionAdmin(admin.ModelAdmin):
     list_display = ("title", "slug", "description", "created", "modified")
 
 
+@admin.register(Pledge)
+class PledgeAdmin(admin.ModelAdmin):
+    list_display = ("user", "action", "created", "modified")
+
+
 @admin.register(Metric)
 class MetricAdmin(admin.ModelAdmin):
     list_display = ("title", "slug", "description", "created", "modified")
 
 
 @admin.register(Answer)
-class PledgeAdmin(admin.ModelAdmin):
+class AnswerAdmin(admin.ModelAdmin):
     list_display = (
-        "user",
+        "pledge",
         "question",
         "value",
         "created",

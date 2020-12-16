@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from pledge.actions import helpers
+from pledge.actions.models import Pledge
 
 
 class HomeView(TemplateView):
@@ -10,5 +11,5 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["total_pledges"] = helpers.get_total_pledges()
+        context["total_pledges"] = Pledge.objects.all().count
         return context
