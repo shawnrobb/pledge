@@ -26,12 +26,15 @@ class HomeView(TemplateView):
         for metric in Metric.objects.all():
             metrics.append((metric.title, helpers.get_total_impact(metric)))
         context["metrics"] = metrics
-        context["users"] = User.objects.exclude(id=self.request.user.id)
-        context["my_pledges"] = Pledge.objects.filter(user=self.request.user)
+
+        # show other users pledges to authenticated users
+        if self.request.user.is_authenticated:
+            context["users"] = User.objects.exclude(id=self.request.user.id)
+            context["my_pledges"] = Pledge.objects.filter(user=self.request.user)
         return context
 
 
-class UserPledgesView(DetailView):
+class UserPledgesView(LoginRequiredMixin, DetailView):
     """View to display the Pledges a user has made."""
 
     template_name = "actions/user_pledges.html"
