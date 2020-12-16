@@ -74,6 +74,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "pledge.users.apps.UsersConfig",
     "pledge.actions.apps.ActionsConfig",
+    "pledge.home.apps.HomeConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
