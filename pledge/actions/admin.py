@@ -24,13 +24,12 @@ class MetricAdmin(admin.ModelAdmin):
 class PledgeAdmin(admin.ModelAdmin):
     list_display = (
         "user",
-        "action",
-        "attribute",
+        "question",
         "value",
         "created",
         "modified",
     )
-    list_filter = ("action",)
+    list_filter = ("question__action",)
 
 
 class SelectOptionInline(admin.TabularInline):

@@ -9,24 +9,6 @@ class Action(TimeStampedModel, TitleSlugDescriptionModel):
         return self.title
 
 
-class Pledge(TimeStampedModel):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-    action = models.ForeignKey(Action, on_delete=models.CASCADE)
-    attribute = models.CharField(
-        max_length=64
-    )  # Todo: add validator to constrain to specific characters (e.g. a-z and underscores)
-    value = models.FloatField()
-
-    class Meta:
-        unique_together = ("user", "action", "attribute")
-
-    def __str__(self):
-        return f"{self.user} - ({self.action}) ({self.attribute})"
-
-
 class Question(TimeStampedModel):
     SELECT = "select"
     NUMBER = "number"
@@ -55,6 +37,21 @@ class SelectOption(TimeStampedModel):
 
     def __str__(self):
         return f"{self.question} ({self.display_text})"
+
+
+class Pledge(TimeStampedModel):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    value = models.FloatField()
+
+    class Meta:
+        unique_together = ("user", "question")
+
+    def __str__(self):
+        return f"{self.user} - {self.question}"
 
 
 class Metric(TimeStampedModel, TitleSlugDescriptionModel):
